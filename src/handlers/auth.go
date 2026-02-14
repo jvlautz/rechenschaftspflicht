@@ -89,7 +89,7 @@ func LoginGetHandler(auth authentication.Auth) httprouter.Handle {
 		http.SetCookie(w, &cookie)
 
 		log.Printf("User %s logged in via magic link", email)
-		http.Redirect(w, r, "/record-event", http.StatusFound)
+		http.Redirect(w, r, "/all-events", http.StatusFound)
 	}
 }
 
