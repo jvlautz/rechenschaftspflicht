@@ -133,11 +133,10 @@ func PlotsHandler(eventStore eventstore.EventStore) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		events, err := eventStore.GetAll()
 		if err != nil {
-			fmt.Printf("failed to retrieve events: %v\n", err)
-			http.Error(w, "internal server error", http.StatusInternalServerError)
+			http.Error(w, "Failed to retrieve events", http.StatusInternalServerError)
+			log.Printf("Error retrieving events from event store: %v", err)
 			return
 		}
-
 		err = views.LayoutWithNav(views.Plots(events)).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
