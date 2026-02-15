@@ -13,7 +13,7 @@ FROM alpine
 RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
-RUN addgroup -S app && adduser -S -G app app
+RUN addgroup -g 1000 -S app && adduser -u 1000 -G app -S app
 USER app
 COPY --from=builder /app/main .
 
