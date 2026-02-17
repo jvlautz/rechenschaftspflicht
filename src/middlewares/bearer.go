@@ -17,12 +17,19 @@ func RequireBearerToken(bearerToken string) func(httprouter.Handle) httprouter.H
 			}
 
 			parts := strings.SplitN(authHeader, " ", 2)
-			if len(parts) != 2 || !strings.EqualFold(parts[0], "Bearer") {
+			if len(parts) != 2 {
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
 
-			if parts[1] != bearerToken {
+			prefixInvalid := !strings.EqualFold(parts[0], "Bearer")
+			if prefixInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+
+			tokenInvalid := parts[1] != bearerToken
+			if tokenInvalid {
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
