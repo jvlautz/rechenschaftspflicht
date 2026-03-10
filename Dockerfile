@@ -18,6 +18,7 @@ COPY --from=litestream /usr/local/lib/litestream-vfs.so /usr/local/lib/litestrea
 
 WORKDIR /app
 RUN addgroup -g 1000 -S app && adduser -u 1000 -G app -S app
+RUN mkdir -p /app/data && chown 1000:1000 /app/data
 USER app
 COPY --from=builder /app/main .
 COPY src/etc/litestream.yml /etc/litestream.yml
