@@ -14,8 +14,15 @@ services:
       - SMTP_USER=""
       - SMTP_PASS=""
       - APP_ORIGIN=http://localhost:8080
+      - LITESTREAM_ACCESS_KEY_ID=test
+      - LITESTREAM_SECRET_ACCESS_KEY=test
+      - LITESTREAM_ENDPOINT=http://s3mock:9090
+      - LITESTREAM_BUCKET=litestream
     depends_on:
-      - mailpit
+      mailpit:
+        condition: service_started
+      s3mock:
+        condition: service_started
     restart: unless-stopped
 
   mailpit:
@@ -23,4 +30,12 @@ services:
     ports:
       - "1080:8025"
       - "1025:1025"
+    restart: unless-stopped
+
+  s3mock:
+    image: adobe/s3mock:latest
+    environment:
+      - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=litestream
+    ports:
+      - "9090:9090"
     restart: unless-stopped
