@@ -32,21 +32,21 @@ func LoginPostHandler(userStore userstore.UserStore, auth authentication.Auth) h
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		if err := r.ParseForm(); err != nil {
 			log.Printf("error parsing form: %v", err)
-			http.Redirect(w, r, "/check-your-email", http.StatusFound)
+			http.Redirect(w, r, "/oops", http.StatusFound)
 			return
 		}
 
 		email := r.FormValue("email")
 		if email == "" {
 			log.Println("email required")
-			http.Redirect(w, r, "/check-your-email", http.StatusFound)
+			http.Redirect(w, r, "/oops", http.StatusFound)
 			return
 		}
 
 		exists, err := userStore.IsUser(email)
 		if err != nil {
 			log.Printf("error checking user %s: %v", email, err)
-			http.Redirect(w, r, "/check-your-email", http.StatusFound)
+			http.Redirect(w, r, "/oops", http.StatusFound)
 			return
 		}
 		if !exists {
@@ -58,12 +58,12 @@ func LoginPostHandler(userStore userstore.UserStore, auth authentication.Auth) h
 		token, err := auth.GenerateToken(email)
 		if err != nil {
 			log.Printf("could not generate token for %s: %v", email, err)
-			http.Redirect(w, r, "/check-your-email", http.StatusFound)
+			http.Redirect(w, r, "/oops", http.StatusFound)
 			return
 		}
 		if err := auth.SendMagicLink(email, token); err != nil {
 			log.Printf("could not send email to %s: %v", email, err)
-			http.Redirect(w, r, "/check-your-email", http.StatusFound)
+			http.Redirect(w, r, "/oops", http.StatusFound)
 			return
 		}
 		log.Printf("magic login link sent to %s", email)
