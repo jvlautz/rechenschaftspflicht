@@ -132,7 +132,7 @@ func (s *magicLinksSvc) LoggedIn(token string) http.Cookie {
 		Name:     "auth",
 		Value:    token,
 		Path:     "/",
-		Expires:  time.Now().Add(15 * time.Minute),
+		Expires:  time.Now().Add(30 * 24 * time.Hour),
 		HttpOnly: true,
 		Secure:   s.isHTTPS,
 		SameSite: http.SameSiteLaxMode,
