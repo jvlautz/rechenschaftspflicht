@@ -7,9 +7,9 @@ RUN apk add --no-cache build-base
 
 COPY src ./
 RUN --mount=type=cache,target=/root/.cache/go-build \
-    GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o main .
+  GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o main .
 
-FROM litestream/litestream:0.5 AS litestream
+FROM litestream/litestream:0.5.10 AS litestream
 
 FROM alpine AS prod
 RUN apk add --no-cache ca-certificates
