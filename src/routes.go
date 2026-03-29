@@ -35,6 +35,7 @@ func addRoutes(
 	router.GET("/events.json", requireLogin(handlers.EventsJsonHandler(eventStore)))
 	router.GET("/plots", requireLogin(handlers.PlotsHandler(eventStore)))
 	router.GET("/logout", requireLogin(handlers.LogoutHandler(auth)))
+	router.GET("/oops", handlers.OopsHandler)
 	router.POST("/add-user", requireBearerToken(handlers.AddUserHandler(userStore)))
 
 	router.GET("/assets/*filepath", handlers.AssetsHandler(embeddedAssets))
