@@ -60,7 +60,7 @@ func isHTTPS(origin string) bool {
 func (s *magicLinksSvc) GenerateToken(email string) (string, error) {
 	claims := jwt.MapClaims{
 		"email": email,
-		"exp":   time.Now().Add(15 * time.Minute).Unix(),
+		"exp":   time.Now().Add(30 * 24 * time.Hour).Unix(),
 	}
 	t := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return t.SignedString(s.jwtSecret)

@@ -120,7 +120,7 @@ function updatePlot() {
     facet: { data: processedData, y: "tag" },
     color: { legend: true },
     marks: [
-      // Dynamic Confidence Band (2-sigma)
+      // Dynamic Confidence Band (2*sigma)
       Plot.areaY(processedData, {
         x: (d) => new Date(d.recordedAt),
         y1: (d) => d.kalmanValue - 2 * d.error,
@@ -147,7 +147,7 @@ function updatePlot() {
       Plot.gridY(),
     ],
     x: { label: "Recorded Time →" },
-    y: { label: "Estimated Value" },
+    y: { label: "Estimated Value", facet: { share: false } },
     marginLeft: 80,
     marginBottom: 50,
     height: 800,
