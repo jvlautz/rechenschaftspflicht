@@ -118,6 +118,11 @@ function updatePlot() {
 
   const plot = Plot.plot({
     facet: { data: processedData, y: "tag" },
+    y: { 
+      label: "Estimated Value", 
+      facet: "separate", 
+      reserve: 40 // This tells Plot each facet gets its own scale
+    } ,
     color: { legend: true },
     marks: [
       // Dynamic Confidence Band (2*sigma)
