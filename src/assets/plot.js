@@ -140,8 +140,8 @@ function updatePlot() {
         x: (d) => new Date(d.recordedAt),
         y: "valueNum",
         stroke: "recordedBy",
-        r: 1.5,
-        strokeOpacity: 0.3
+        r: 3,
+        strokeOpacity: 0.8
       }),
       Plot.gridX(),
       Plot.gridY(),
@@ -151,7 +151,7 @@ function updatePlot() {
     marginLeft: 80,
     marginBottom: 50,
     height: 800,
-    width: 1200,
+    width: 1000,
   });
 
   const div = document.querySelector("#myplot");
