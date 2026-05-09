@@ -109,25 +109,12 @@ function updatePlot() {
   });
 
   const plot = Plot.plot({
-    // Faceting configuration
-    facet: { 
-      data: processedData, 
-      y: "tag" 
-    },
-    // The Y scale configuration is key for independent scales
+    facet: { data: processedData, y: "tag" },
     y: { 
-      grid: true,
-      facet: "separate", // Each subplot gets its own domain (scale)
-      label: "Value"
-    },
-    fy: {
-      label: null, // Removes redundant tag labels on the far right if preferred
-      padding: 0.2
-    },
-    x: { 
-      label: "Time →",
-      grid: true 
-    },
+      label: "Estimated Value", 
+      facet: "separate", 
+      reserve: 40 // This tells Plot each facet gets its own scale
+    } ,
     color: { legend: true },
     marks: [
       // Confidence Band
@@ -150,14 +137,18 @@ function updatePlot() {
         x: (d) => new Date(d.recordedAt),
         y: "valueNum",
         stroke: "recordedBy",
-        r: 2.5,
-        strokeOpacity: 0.5
-      })
+        r: 3,
+        strokeOpacity: 0.8
+      }),
+      Plot.gridX(),
+      Plot.gridY(),
     ],
-    marginLeft: 100,
+    x: { label: "Recorded Time →" },
+    y: { label: "Estimated Value", facet: { share: false } },
+    marginLeft: 80,
+    marginBottom: 50,
+    height: 800,
     width: 1000,
-    // Adjust height based on number of active tags to prevent squishing
-    height: Math.max(200, activeTags.size * 250), 
   });
 
   const div = document.querySelector("#myplot");
