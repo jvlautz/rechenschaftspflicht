@@ -2,3 +2,4 @@
 go = "1.25"
 golangci-lint = "2.7.2"
 hivemind = "latest"
+litestream = "latest"
