@@ -50,7 +50,7 @@ func run(
 	router := httprouter.New()
 	addRoutes(router, cfg, eventStore, userStore, auth)
 	requestLogging := sloghttp.New(logger)
-	handlerWithMiddlewares := middlewares.SecurityHeaders(requestLogging(router))
+	handlerWithMiddlewares := middlewares.TemplCSSWithNonce(middlewares.SecurityHeaders(requestLogging(router)))
 
 	srv := &http.Server{Addr: ":8080", Handler: handlerWithMiddlewares}
 

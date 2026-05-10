@@ -20,43 +20,46 @@ templ NewEventFormWithSuccessBanner() {
 	@NewEventForm()
 }
 
+css successBanner() {
+	margin-bottom: 20px;
+	border: 2px solid #00703c;
+	background-color: #eaf7ed;
+	padding: 15px;
+	display: flex;
+	align-items: flex-start;
+}
+
+css successBannerIcon() {
+	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+	margin-right: 10px;
+	color: #00703c;
+}
+
+css successBannerContent() {
+	flex-grow: 1;
+}
+
+css successBannerTitle() {
+	margin: 0 0 5px 0;
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #00703c;
+}
+
+css successBannerDescription() {
+	margin: 0;
+}
+
 templ EventRecordedBanner() {
-	<style>
-    .success-banner {
-        padding: 15px;
-        border: 2px solid #00703c;
-        background-color: #eaf7ed;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: flex-start;
-    }
-    .success-banner__icon {
-        flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-        margin-right: 10px;
-        color: #00703c;
-    }
-    .success-banner__content {
-        flex-grow: 1;
-    }
-    .success-banner__title {
-        margin: 0 0 5px 0;
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #00703c;
-    }
-    .success-banner__description {
-        margin: 0;
-    }
-    </style>
-	<div class="success-banner" role="alert" aria-labelledby="success-banner-title">
-		<svg class="success-banner__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+	<div class={ successBanner() } role="alert" aria-labelledby="success-banner-title">
+		<svg class={ successBannerIcon() } viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
 			<path d="M12 0a12 12 0 1 0 12 12A12.014 12.014 0 0 0 12 0zm5.707 9.293l-6.414 6.414a1 1 0 0 1-1.414 0L6.293 12.707a1 1 0 0 1 1.414-1.414L11 14.586l5.293-5.293a1 1 0 0 1 1.414 1.414z"></path>
 		</svg>
-		<div class="success-banner__content">
-			<h2 class="success-banner__title" id="success-banner-title">Success</h2>
-			<p class="success-banner__description">Your event was successfully recorded.</p>
+		<div class={ successBannerContent() }>
+			<h2 class={ successBannerTitle() } id="success-banner-title">Success</h2>
+			<p class={ successBannerDescription() }>Your event was successfully recorded.</p>
 		</div>
 	</div>
 }
