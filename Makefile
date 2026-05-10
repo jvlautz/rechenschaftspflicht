@@ -20,8 +20,8 @@ build-container:
 
 LOCAL_TRUNK_VER := $(shell date --utc +%Y%m%d%H%M%S)-$(shell git rev-parse --short HEAD)$(shell if git diff --quiet; then echo ""; else echo "-dirty"; fi)
 
-.PHONY: deploy
-deploy: build-container
+.PHONY: release
+release: build-container
 	docker tag rechenschaftspflicht rknt/rechenschaftspflicht:$(LOCAL_TRUNK_VER)
 	docker push rknt/rechenschaftspflicht:$(LOCAL_TRUNK_VER)
 	cd /home/hff/repos/rknt-server && git pull
