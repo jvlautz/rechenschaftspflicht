@@ -110,11 +110,23 @@ function updatePlot() {
 
   const plot = Plot.plot({
     facet: { data: processedData, y: "tag" },
+   fy: {
+     label : null,
+     padding: 0.1
+   },
+
     y: { 
       label: "Estimated Value", 
-      facet: "separate", 
-      reserve: 40 // This tells Plot each facet gets its own scale
+      facet: {share: false}, 
+      grid: true, 
+      nice: true
     } ,
+    x: {
+      label: "Recorded Time ",
+      grid: true
+    }, 
+   
+
     color: { legend: true },
     marks: [
       // Confidence Band
@@ -143,8 +155,6 @@ function updatePlot() {
       Plot.gridX(),
       Plot.gridY(),
     ],
-    x: { label: "Recorded Time →" },
-    y: { label: "Estimated Value", facet: { share: false } },
     marginLeft: 80,
     marginBottom: 50,
     height: 800,
